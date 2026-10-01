@@ -1,0 +1,15 @@
+{
+  "rows_before": 5,
+  "rows_after": 3,
+  "duplicates_removed": 2,
+  "columns": [
+    "customer_id",
+    "name",
+    "email",
+    "city"
+  ],
+  "dedupe_columns_used": [
+    "customer_id",
+    "email"
+  ]
+}

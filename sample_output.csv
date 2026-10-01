@@ -1,0 +1,4 @@
+customer_id,name,email,city
+1001,Alice Smith,alice@example.com,Pune
+1002,Bob Jones,bob@example.com,Mumbai
+1003,Carol Ray,carol@example.com,Pune
