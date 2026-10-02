@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tirthanand17.github.io/excel-csv-python-automation-demo/sitemap.xml
