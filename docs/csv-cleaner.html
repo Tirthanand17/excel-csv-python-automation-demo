@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free CSV Cleaner - Remove Duplicates, Trim Spaces & Normalize Headers</title>
+<meta name="description" content="Free browser-based CSV cleaner. Remove duplicate rows, trim whitespace, normalize headers, and export a cleaned CSV. Files stay in your browser.">
+<style>
+body{font-family:system-ui,Segoe UI,Arial,sans-serif;margin:0;background:#0b1020;color:#edf2f7}
+main{max-width:920px;margin:auto;padding:32px 18px 64px}a{color:#61dafb}h1{font-size:clamp(34px,6vw,58px);line-height:1.05}
+p{color:#a8b7ca;line-height:1.65}.card{background:#121a2e;border:1px solid #263653;border-radius:14px;padding:20px;margin-top:18px}
+input[type=file]{width:100%;padding:14px;background:#0d1426;border:1px dashed #3a5074;border-radius:10px;color:#edf2f7}
+button{border:0;border-radius:9px;padding:12px 16px;font-weight:700;margin:10px 8px 0 0;cursor:pointer}
+.primary{background:#61dafb;color:#06101a}.secondary{background:#1a2640;color:#edf2f7;border:1px solid #304261}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}.stat{background:#0d1426;padding:12px;border-radius:9px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px}th,td{border:1px solid #263653;padding:8px;text-align:left;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.notice{font-size:13px;color:#8fa2ba}.ok{color:#8ef0b0}.bad{color:#ff9b9b}
+</style></head>
+<body><main>
+<p><a href="./">← Services</a></p>
+<h1>Free CSV Cleaner</h1>
+<p>Clean a CSV directly in your browser. It trims whitespace, normalizes column names, removes fully duplicated rows, lowercases email values, and lets you download the cleaned CSV. Your file is processed locally and is not uploaded to a server.</p>
+<div class="card">
+<input id="file" type="file" accept=".csv,text/csv">
+<div>
+<button class="primary" id="clean" disabled>Clean CSV</button>
+<button class="secondary" id="download" disabled>Download cleaned CSV</button>
+</div>
+<div id="message" class="notice">Choose a CSV file to begin.</div>
+<div class="stats" id="stats" hidden>
+<div class="stat"><b id="rowsIn">0</b><br><span class="notice">Rows in</span></div>
+<div class="stat"><b id="rowsOut">0</b><br><span class="notice">Rows out</span></div>
+<div class="stat"><b id="removed">0</b><br><span class="notice">Duplicates removed</span></div>
+<div class="stat"><b id="cols">0</b><br><span class="notice">Columns</span></div>
+</div>
+<div style="overflow:auto"><table id="preview" hidden></table></div>
+</div>
+<div class="card">
+<h2>Need a repeatable workflow?</h2>
+<p>This free tool handles simple CSV cleanup. For recurring reports, multi-file merges, XLSX processing, custom validation, API inputs, OCR/PDF work, or business-specific rules, request a scoped automation.</p>
+<p><a href="https://github.com/Tirthanand17/excel-csv-python-automation-demo/issues/new?template=paid-work.yml">Request a custom automation quote →</a></p>
+</div>
+<script>
+let cleaned='', parsed=[];
+const f=document.getElementById('file'), cleanBtn=document.getElementById('clean'), dl=document.getElementById('download'), msg=document.getElementById('message');
+function parseCSV(s){let rows=[],row=[],cell='',q=false;for(let i=0;i<s.length;i++){let c=s[i],n=s[i+1];if(c=='"'){if(q&&n=='"'){cell+='"';i++;}else q=!q;}else if(c==','&&!q){row.push(cell);cell='';}else if((c=='\n'||c=='\r')&&!q){if(c=='\r'&&n=='\n')i++;row.push(cell);rows.push(row);row=[];cell='';}else cell+=c;}if(cell.length||row.length){row.push(cell);rows.push(row);}return rows.filter(r=>r.some(x=>x.trim()!==''));}
+function esc(v){v=String(v??'');return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
+function normHeader(v){return v.trim().toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'')||'column';}
+function render(rows){const t=document.getElementById('preview');t.innerHTML='';rows.slice(0,11).forEach((r,i)=>{const tr=document.createElement('tr');r.forEach(v=>{const el=document.createElement(i===0?'th':'td');el.textContent=v;tr.appendChild(el)});t.appendChild(tr)});t.hidden=false;}
+f.onchange=()=>{cleanBtn.disabled=!f.files[0];dl.disabled=true;msg.textContent=f.files[0]?'Ready to clean '+f.files[0].name:'Choose a CSV file to begin.'};
+cleanBtn.onclick=async()=>{try{const text=await f.files[0].text();const rows=parseCSV(text);if(rows.length<1)throw new Error('No CSV rows found.');const headers=rows[0].map(normHeader);const emailIdx=headers.map((h,i)=>h.includes('email')?i:-1).filter(i=>i>=0);const seen=new Set(),out=[headers];for(const r0 of rows.slice(1)){let r=headers.map((_,i)=>(r0[i]??'').trim());emailIdx.forEach(i=>r[i]=r[i].toLowerCase());const k=JSON.stringify(r);if(!seen.has(k)){seen.add(k);out.push(r);}}cleaned=out.map(r=>r.map(esc).join(',')).join('\r\n');parsed=out;document.getElementById('rowsIn').textContent=Math.max(0,rows.length-1);document.getElementById('rowsOut').textContent=Math.max(0,out.length-1);document.getElementById('removed').textContent=Math.max(0,rows.length-out.length);document.getElementById('cols').textContent=headers.length;document.getElementById('stats').hidden=false;render(out);dl.disabled=false;msg.innerHTML='<span class="ok">Cleaned successfully.</span> Preview shows up to ten data rows.';}catch(e){msg.innerHTML='<span class="bad">'+e.message+'</span>';}}
+dl.onclick=()=>{const b=new Blob([cleaned],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='cleaned.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+</script></main></body></html>
