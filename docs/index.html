@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python Automation & Data Cleanup Services</title>
+<meta name="description" content="Fixed-scope Python automation, Excel/CSV cleanup, OCR/PDF processing and data analysis services.">
+<style>
+:root{--bg:#0b1020;--card:#121a2e;--text:#edf2f7;--muted:#9fb0c6;--accent:#61dafb;--line:#263653}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#10192e);color:var(--text)}
+.wrap{max-width:1000px;margin:auto;padding:36px 20px 70px}.hero{padding:56px 0 30px}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
+h1{font-size:clamp(36px,7vw,64px);line-height:1.02;margin:12px 0 18px;max-width:850px}h2{margin-top:44px;font-size:28px}
+p{color:var(--muted);line-height:1.7}.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700}
+.primary{background:var(--accent);color:#06101a}.secondary{border:1px solid var(--line);color:var(--text)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin-top:18px}.card{background:rgba(18,26,46,.94);border:1px solid var(--line);border-radius:14px;padding:20px}
+.price{font-size:24px;font-weight:800;margin:8px 0}.small{font-size:13px;color:var(--muted)}
+label{display:block;margin:12px 0 6px;font-weight:700}select,input{width:100%;padding:11px;border-radius:8px;border:1px solid var(--line);background:#0d1426;color:var(--text)}
+.quote{margin-top:14px;font-size:22px;font-weight:800}.proof a{color:var(--accent)}footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+<div class="eyebrow">Python • Data • Automation</div>
+<h1>Turn repetitive data work into a tested Python workflow.</h1>
+<p>I build small, fixed-scope automations for spreadsheets, files, documents, and reporting. The focus is practical delivery: clear inputs, reliable outputs, tests where useful, and a handoff you can run again.</p>
+<div class="cta">
+<a class="btn primary" href="https://github.com/Tirthanand17/excel-csv-python-automation-demo/issues/new?template=paid-work.yml">Request a quote</a>
+<a class="btn secondary" href="https://github.com/Tirthanand17/excel-csv-python-automation-demo">Review the code</a>
+</div>
+</section>
+
+<h2>Services</h2>
+<div class="grid">
+<div class="card"><b>Excel / CSV Automation</b><div class="price">from $25</div><p>Cleanup, deduplication, merging, normalization, validation, and export workflows.</p></div>
+<div class="card"><b>Python Automation</b><div class="price">from $40</div><p>Repeatable scripts for file processing, reporting, checks, and routine data operations.</p></div>
+<div class="card"><b>OCR / PDF Processing</b><div class="price">from $20</div><p>Searchable PDFs, extraction, batch conversion, and document-processing workflows.</p></div>
+<div class="card"><b>Data Analysis</b><div class="price">from $50</div><p>Dataset cleanup, KPI summaries, exploratory analysis, and dashboard-ready outputs.</p></div>
+</div>
+
+<h2>Quick quote estimator</h2>
+<div class="card">
+<label for="service">Service</label>
+<select id="service">
+<option value="25">Excel / CSV cleanup</option>
+<option value="40">Python automation</option>
+<option value="20">OCR / PDF processing</option>
+<option value="50">Data analysis / reporting</option>
+</select>
+<label for="complexity">Complexity</label>
+<select id="complexity">
+<option value="1">Small / clear scope</option>
+<option value="2">Medium / multiple steps</option>
+<option value="3">Larger / integration or testing</option>
+</select>
+<label for="rush">Rush delivery</label>
+<select id="rush">
+<option value="1">Standard</option>
+<option value="1.35">Priority</option>
+</select>
+<div class="quote" id="quote">Estimated starter quote: $25</div>
+<div class="small">Indicative only. Final price depends on the exact inputs, outputs, volume, and acceptance criteria.</div>
+</div>
+
+<h2>What delivery looks like</h2>
+<div class="grid">
+<div class="card"><b>1. Define</b><p>Confirm the input format, desired output, edge cases, and success criteria.</p></div>
+<div class="card"><b>2. Build</b><p>Create the workflow with readable code and conservative handling of uncertain data.</p></div>
+<div class="card"><b>3. Verify</b><p>Run sample cases and add automated tests where they materially reduce risk.</p></div>
+<div class="card"><b>4. Handoff</b><p>Deliver the script/workflow, output files, and simple run instructions.</p></div>
+</div>
+
+<h2>Proof of work</h2>
+<div class="card proof">
+<p>This repository contains a real reusable spreadsheet-cleaning workflow with CSV/XLSX support, duplicate handling, column normalization, JSON run summaries, pytest tests, and GitHub Actions CI.</p>
+<p><a href="https://github.com/Tirthanand17/excel-csv-python-automation-demo">Open source code and tests →</a></p>
+</div>
+
+<footer>Do not post passwords, API keys, private datasets, IDs, payment information, or confidential client files in a public GitHub issue.</footer>
+</main>
+<script>
+const service=document.getElementById('service'),complexity=document.getElementById('complexity'),rush=document.getElementById('rush'),quote=document.getElementById('quote');
+function calc(){const n=Math.round(Number(service.value)*Number(complexity.value)*Number(rush.value));quote.textContent='Estimated starter quote: $'+n;}
+[service,complexity,rush].forEach(x=>x.addEventListener('change',calc));calc();
+</script></body></html>
