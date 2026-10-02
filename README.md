@@ -1,4 +1,6 @@
-﻿# Python Excel & CSV Automation Demo
+# Python Excel & CSV Automation Demo
+
+[![Tests](https://github.com/Tirthanand17/excel-csv-python-automation-demo/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/Tirthanand17/excel-csv-python-automation-demo/actions/workflows/tests.yml)
 
 A small, production-style portfolio project that turns repetitive spreadsheet cleanup into a reusable Python workflow.
 
