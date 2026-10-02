@@ -43,6 +43,13 @@ Output:
 |---|---|---|
 | 1001 | Alice Smith | alice@example.com |
 
+
+## Hire / request a project
+
+Live service page: **https://tirthanand17.github.io/excel-csv-python-automation-demo/**
+
+Use the page for transparent starter pricing and the quote estimator, or open a [Paid Work Request](../../issues/new?template=paid-work.yml) for a scoped Python, Excel/CSV, OCR/PDF, or data-analysis project.
+
 ## Typical client use cases
 
 - Repetitive Excel/CSV cleanup
