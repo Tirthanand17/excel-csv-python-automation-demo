@@ -1,0 +1,49 @@
+name: Paid Work Request
+description: Request a quote for Python, Excel/CSV, OCR/PDF or data-analysis work
+title: "[Work Request] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please share only non-sensitive information. Do not post passwords, API keys, IDs, payment information, confidential files, or private client data.
+  - type: dropdown
+    id: service
+    attributes:
+      label: Service
+      options:
+        - Excel / CSV automation
+        - Python automation
+        - OCR / PDF processing
+        - Data analysis / reporting
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What manual task or problem should be solved?
+    validations:
+      required: true
+  - type: textarea
+    id: io
+    attributes:
+      label: Inputs and expected outputs
+      description: Describe formats and examples without including private data.
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline
+      placeholder: e.g. 3 days
+  - type: input
+    id: budget
+    attributes:
+      label: Approximate budget
+      placeholder: e.g. $50
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What must be true for the work to be considered complete?
